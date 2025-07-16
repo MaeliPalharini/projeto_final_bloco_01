@@ -6,22 +6,24 @@ Projeto desenvolvido como parte do Bootcamp da Generation Brasil – Bloco 01, c
 
 ## 📋 Descrição
 
-O **BIOBOX** é um sistema de console que simula um serviço de assinatura de planos de entrega de produtos orgânicos, como cestas básicas, kits personalizados e pacotes semanais. O projeto aplica as boas práticas de organização de código, estrutura de diretórios, e uso de TypeScript com `ts-node`.
+O **BIOBOX** é  uma iniciativa social inspirada no modelo de cooperativas, que simula um serviço de assinatura de cestas com alimentos orgânicos. A proposta central é tornar a alimentação saudável mais acessível, permitindo que cada cliente defina o valor que pode pagar pelo plano escolhido.
+
+O sistema, em formato de console, representa essa filosofia ao possibilitar o cadastro livre de planos com preços definidos pelos próprios usuários, respeitando diferentes realidades financeiras.
 
 ---
 
 ## 🚀 Funcionalidades
 
-- Exibição de menu interativo no terminal
-- Cadastro de planos de assinatura:
-  - Plano Básico
-  - Plano Personalizado
-- Listagem de planos cadastrados
-- Atualização de dados de um plano
-- Exclusão de plano
-- Tratamento de entrada de dados
-- Exibição de data e hora em tempo real
-
+- Menu interativo no terminal
+    - Cadastro de planos de assinatura:
+    Plano Básico  com itens fixos
+    Plano Personalizado – com escolha livre de itens adicionais
+    - Definição livre de valor do plano por parte do cliente
+    - Listagem de todos os planos cadastrados
+    - Atualização de informações dos planos
+    - Exclusão de planos
+    - Exibição clara do resumo dos contratos
+    - Exibição de data e hora em tempo real
 ---
 
 ## 🛠️ Tecnologias Utilizadas

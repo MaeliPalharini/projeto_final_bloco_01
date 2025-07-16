@@ -14,11 +14,11 @@ constructor(id:number, nome: string, frequencia: string, preco:number) {
 
 public getId(): number {
     return this.id;
-  }
+}
 
 public setNome(nome: string): void {
     this.nome = nome;
-  }
+}
 
 public getNome(): string {
     return this.nome;

@@ -1,5 +1,10 @@
 import readlineSync from "readline-sync";
 import { Colors } from "./src/util/Colors";
+import { PlanoSimples } from "./src/model/PlanoSimples";
+import { PlanoPersonalizado } from "./src/model/PlanoPersonalizado";
+import { PlanoController } from "./src/controller/PlanoController";
+
+const controller = new PlanoController();
 
 function exibirMenu(): void {
   console.clear();
@@ -44,22 +49,88 @@ do {
 
   switch (opcao) {
     case 1:
-      console.log("Cadastrar novo Plano de assinatura");
+      console.log("\n--- Cadastrar Plano Simples ---");
+      const nomeSimples = readlineSync.question("Nome do plano: ");
+      const precoSimples = readlineSync.questionFloat("Preço: ");
+      const frequenciaSimples = readlineSync.question(
+        "Frequência (semanal, mensal): "
+      );
+      const planoSimples = new PlanoSimples(
+        0,
+        nomeSimples,
+        frequenciaSimples,
+        precoSimples
+      );
+      controller.cadastrar(planoSimples);
       break;
-    case 2:
-      console.log("Listando todos os planos");
+
+    case 2: {
+      console.log("\n--- Cadastrar Plano Personalizado ---");
+      const nomePersonalizado = readlineSync.question("Nome do plano: ");
+      const precoPersonalizado = readlineSync.questionFloat("Preço: ");
+      const frequenciaPersonalizada = readlineSync.question(
+        "Frequência (semanal, mensal): "
+      );
+
+      const opcoesExtras = [
+        "Entrega de frutas exóticas",
+        "Produtos veganos",
+        "Cesta light/fitness",
+        "Produtos sem glúten",
+      ];
+
+      const selecionado = readlineSync.keyInSelect(
+        opcoesExtras,
+        "Escolha os itens personalizados:",
+        { cancel: "Nenhum" }
+      );
+
+      const itensSelecionados =
+        selecionado >= 0 ? [opcoesExtras[selecionado]] : [];
+
+      const planoPersonalizado = new PlanoPersonalizado(
+        0,
+        nomePersonalizado,
+        precoPersonalizado,
+        frequenciaPersonalizada,
+        itensSelecionados
+      );
+
+      controller.cadastrar(planoPersonalizado);
       break;
+    }
+
     case 3:
-      console.log("Atualizando plano existente");
+      controller.listarTodos();
       break;
+
     case 4:
-      console.log("Deletando plano");
+      console.log("\n--- Atualizar Plano ---");
+      const idAtualizar = readlineSync.questionInt("Digite o ID do plano: ");
+      const novoNome = readlineSync.question("Novo nome: ");
+      const novoPreco = readlineSync.questionFloat("Novo preço: ");
+      const novaFrequencia = readlineSync.question("Nova frequência: ");
+      const planoAtualizado = new PlanoSimples(
+        idAtualizar,
+        novoNome,
+        novaFrequencia,
+        novoPreco
+      );
+      controller.atualizar(idAtualizar, planoAtualizado);
       break;
+
+    case 5:
+      console.log("\n--- Excluir Plano ---");
+      const idExcluir = readlineSync.questionInt("ID do plano a excluir: ");
+      controller.excluir(idExcluir);
+      break;
+
     case 0:
-      console.log("Saindo do sistema");
+      console.log("Muito obrigada por escolher a BIOBOX!");
       break;
+
     default:
-      console.log("Opção inválida! Tente novamente");
+      console.log("Opção inválida! Tente novamente.");
   }
 
   if (opcao !== 0) keyPress();

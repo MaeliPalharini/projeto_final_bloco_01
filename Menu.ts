@@ -126,10 +126,10 @@ do {
       const frequenciaPersonalizada = lerFrequencia();
 
       const opcoesExtras = [
-        "Entrega de frutas exóticas",
+        "Entrega de frutas exoticas",
         "Produtos veganos",
         "Cesta light/fitness",
-        "Produtos sem glúten",
+        "Produtos sem gluten",
       ];
       //acabei tirando o keyselect(selecionava so um) e fiz função e esse for de sim ou não
       const itensSelecionados: string[] = [];

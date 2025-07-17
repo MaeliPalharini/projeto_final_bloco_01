@@ -19,6 +19,10 @@ export abstract class Plano {
     this.preco = preco;
   }
 
+  public setId(id: number): void {
+    this.id = id;
+  }
+
   public getId(): number {
     return this.id;
   }

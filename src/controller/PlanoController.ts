@@ -32,7 +32,7 @@ export class PlanoController implements PlanoRepository {
   }
 
   public cadastrar(plano: Plano): void {
-    plano["id"] = this.gerarId();
+    plano.setId(this.gerarId());
     this.listaPlanos.push(plano);
 
     console.log(
@@ -46,7 +46,7 @@ export class PlanoController implements PlanoRepository {
     const index = this.listaPlanos.findIndex((plano) => plano.getId() === id);
 
     if (index !== -1) {
-      novoPlano["id"] = id;
+      novoPlano.setId(id);
       this.listaPlanos[index] = novoPlano;
       console.log(
         Colors.fg.green,

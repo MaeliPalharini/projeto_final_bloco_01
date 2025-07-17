@@ -23,7 +23,7 @@ function exibirMenu(): void {
   console.log(Colors.fg.magenta + "=".repeat(60) + Colors.reset);
 
   console.log("");
-  console.log("  1 - Cadastrar Plano Básico");
+  console.log("  1 - Cadastrar Plano Simples");
   console.log("  2 - Cadastrar Plano Personalizado");
   console.log("  3 - Listar Planos");
   console.log("  4 - Atualizar Plano");
@@ -39,9 +39,62 @@ function keyPress(): void {
   readlineSync.prompt();
 }
 
-let opcao: number;
+function lerNomePlano(): string {
+  const opcoesValidas = ["simples", "personalizado"];
+  let nome: string;
+  while (true) {
+    nome = readlineSync
+      .question("Nome do plano (simples/personalizado): ")
+      .toLowerCase();
+    if (opcoesValidas.includes(nome)) {
+      return nome;
+    } else {
+      console.log("Nome inválido. Digite 'simples' ou 'personalizado'.");
+    }
+  }
+}
+// add o !isNaN pois ele garante que o valor inserido seja um número e maior que zero.
+function lerPreco(): number {
+  let preco: number;
+  while (true) {
+    preco = readlineSync.questionFloat("Preco (numero positivo): ");
+    if (!isNaN(preco) && preco > 0) {
+      return preco;
+    } else {
+      console.log("Preco invalido. Digite um numero positivo.");
+    }
+  }
+}
+
+function lerFrequencia(): string {
+  const opcoesValidas = ["semanal", "mensal"];
+  let frequencia: string;
+  while (true) {
+    frequencia = readlineSync
+      .question("Frequencia (semanal/mensal): ")
+      .toLowerCase();
+    if (opcoesValidas.includes(frequencia)) {
+      return frequencia;
+    } else {
+      console.log("Frequencia invalida. Digite 'semanal' ou 'mensal'.");
+    }
+  }
+}
+//add keyIn resposta com tecla unica
+function perguntarSimNao(mensagem: string): boolean {
+  const resposta = readlineSync.keyIn(
+    `${Colors.fg.yellow}${mensagem} [s/n]: ${Colors.reset}`,
+    {
+      limit: "sn",
+      caseSensitive: false,
+    }
+  );
+  return resposta.toLowerCase() === "s";
+}
+
 const dataAtual = new Date().toLocaleString("pt-BR");
 console.log(`${Colors.fg.cyan}Data atual: ${dataAtual}${Colors.reset}`);
+let opcao: number;
 
 do {
   exibirMenu();
@@ -50,11 +103,9 @@ do {
   switch (opcao) {
     case 1:
       console.log("\n--- Cadastrar Plano Simples ---");
-      const nomeSimples = readlineSync.question("Nome do plano: ");
-      const precoSimples = readlineSync.questionFloat("Preco: ");
-      const frequenciaSimples = readlineSync.question(
-        "Frequencia (semanal, mensal): "
-      );
+      const nomeSimples = "simples";
+      const precoSimples = lerPreco();
+      const frequenciaSimples = lerFrequencia();
       const planoSimples = new PlanoSimples(
         0,
         nomeSimples,
@@ -62,15 +113,14 @@ do {
         precoSimples
       );
       controller.cadastrar(planoSimples);
+      1;
       break;
 
     case 2: {
       console.log("\n--- Cadastrar Plano Personalizado ---");
-      const nomePersonalizado = readlineSync.question("Nome do plano: ");
-      const precoPersonalizado = readlineSync.questionFloat("Preco: ");
-      const frequenciaPersonalizada = readlineSync.question(
-        "Frequencia (semanal, mensal): "
-      );
+      const nomePersonalizado = "personalizado";
+      const precoPersonalizado = lerPreco();
+      const frequenciaPersonalizada = lerFrequencia();
 
       const opcoesExtras = [
         "Entrega de frutas exóticas",
@@ -78,38 +128,38 @@ do {
         "Cesta light/fitness",
         "Produtos sem glúten",
       ];
-
-      const selecionado = readlineSync.keyInSelect(
-        opcoesExtras,
-        "Escolha os itens personalizados:",
-        { cancel: "Nenhum" }
-      );
-
-      const itensSelecionados =
-        selecionado >= 0 ? [opcoesExtras[selecionado]] : [];
+      //acabei tirando o keyselect(selecionava so um) e fiz função e esse for de sim ou não
+      const itensSelecionados: string[] = [];
+      console.log("\nEscolha os itens personalizados:");
+      for (const extra of opcoesExtras) {
+        if (perguntarSimNao(`Deseja incluir "${extra}"?`)) {
+          itensSelecionados.push(extra);
+        }
+      }
 
       const planoPersonalizado = new PlanoPersonalizado(
         0,
-        nomePersonalizado,
+        "personalizado",
         precoPersonalizado,
         frequenciaPersonalizada,
         itensSelecionados
       );
-
       controller.cadastrar(planoPersonalizado);
       break;
     }
-
     case 3:
       controller.listarTodos();
       break;
 
     case 4:
       console.log("\n--- Atualizar Plano ---");
-      const idAtualizar = readlineSync.questionInt("Digite o ID do plano: ");
-      const novoNome = readlineSync.question("Novo nome: ");
-      const novoPreco = readlineSync.questionFloat("Novo preco: ");
-      const novaFrequencia = readlineSync.question("Nova frequencia: ");
+
+      const idAtualizar = readlineSync.questionInt(
+        "Digite o ID do plano que deseja atualizar: "
+      );
+      const novoNome = lerNomePlano();
+      const novoPreco = lerPreco();
+      const novaFrequencia = lerFrequencia();
       const planoAtualizado = new PlanoSimples(
         idAtualizar,
         novoNome,

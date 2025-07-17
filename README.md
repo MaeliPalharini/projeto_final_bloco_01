@@ -6,7 +6,7 @@ Projeto desenvolvido como parte do Bootcamp da Generation Brasil – Bloco 01, c
 
 ## 📋 Descrição
 
-O **BIOBOX** é  uma iniciativa social inspirada no modelo de cooperativas, que simula um serviço de assinatura de cestas com alimentos orgânicos. A proposta central é tornar a alimentação saudável mais acessível, permitindo que cada cliente defina o valor que pode pagar pelo plano escolhido.
+O **BIOBOX** é uma iniciativa social inspirada no modelo de cooperativas, que simula um serviço de assinatura de cestas com alimentos orgânicos. A proposta central é tornar a alimentação saudável mais acessível, permitindo que cada cliente defina o valor que pode pagar pelo plano escolhido.
 
 O sistema, em formato de console, representa essa filosofia ao possibilitar o cadastro livre de planos com preços definidos pelos próprios usuários, respeitando diferentes realidades financeiras.
 
@@ -20,6 +20,8 @@ O sistema, em formato de console, representa essa filosofia ao possibilitar o ca
     Plano Personalizado – com escolha livre de itens adicionais
 
     - Definição livre de valor do plano por parte do cliente
+
+    - Buscar um plano cadastrado por Id
 
     - Listagem de todos os planos cadastrados
 

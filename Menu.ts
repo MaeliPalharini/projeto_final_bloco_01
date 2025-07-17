@@ -25,9 +25,10 @@ function exibirMenu(): void {
   console.log("");
   console.log("  1 - Cadastrar Plano Simples");
   console.log("  2 - Cadastrar Plano Personalizado");
-  console.log("  3 - Listar Planos");
-  console.log("  4 - Atualizar Plano");
-  console.log("  5 - Excluir Plano");
+  console.log("  3 - Buscar por Id");
+  console.log("  4 - Listar Planos");
+  console.log("  5 - Atualizar Plano");
+  console.log("  6 - Excluir Plano");
   console.log(Colors.fg.yellow + "  0 - Sair" + Colors.reset);
   console.log("");
   console.log(Colors.fg.magenta + "=".repeat(60) + Colors.reset);
@@ -53,11 +54,13 @@ function lerNomePlano(): string {
     }
   }
 }
-// add o !isNaN pois ele garante que o valor inserido seja um número e maior que zero.
-function lerPreco(): number {
+// add o !isNaN (Not a Number) pois ele garante que o valor inserido seja um número e maior que zero.
+// função alterada para versao generica usada para preço ou numero (id)
+function lerNumero(ehPreco = true): number {
   let preco: number;
   while (true) {
-    preco = readlineSync.questionFloat("Preco (numero positivo): ");
+    let texto = ehPreco ? "Preco (numero positivo): " : "Digite o ID: ";
+    preco = readlineSync.questionFloat(texto);
     if (!isNaN(preco) && preco > 0) {
       return preco;
     } else {
@@ -104,7 +107,7 @@ do {
     case 1:
       console.log("\n--- Cadastrar Plano Simples ---");
       const nomeSimples = "simples";
-      const precoSimples = lerPreco();
+      const precoSimples = lerNumero();
       const frequenciaSimples = lerFrequencia();
       const planoSimples = new PlanoSimples(
         0,
@@ -119,7 +122,7 @@ do {
     case 2: {
       console.log("\n--- Cadastrar Plano Personalizado ---");
       const nomePersonalizado = "personalizado";
-      const precoPersonalizado = lerPreco();
+      const precoPersonalizado = lerNumero();
       const frequenciaPersonalizada = lerFrequencia();
 
       const opcoesExtras = [
@@ -148,17 +151,22 @@ do {
       break;
     }
     case 3:
-      controller.listarTodos();
+      console.log("\n--- Buscar por ID ---");
+      4;
+      const id = lerNumero(false);
+      controller.buscarPorId(id);
       break;
 
     case 4:
+      controller.listarTodos();
+      break;
+
+    case 5:
       console.log("\n--- Atualizar Plano ---");
 
-      const idAtualizar = readlineSync.questionInt(
-        "Digite o ID do plano que deseja atualizar: "
-      );
+      const idAtualizar = lerNumero(false);
       const novoNome = lerNomePlano();
-      const novoPreco = lerPreco();
+      const novoPreco = lerNumero();
       const novaFrequencia = lerFrequencia();
       const planoAtualizado = new PlanoSimples(
         idAtualizar,
@@ -169,9 +177,9 @@ do {
       controller.atualizar(idAtualizar, planoAtualizado);
       break;
 
-    case 5:
+    case 6:
       console.log("\n--- Excluir Plano ---");
-      const idExcluir = readlineSync.questionInt("ID do plano a excluir: ");
+      const idExcluir = lerNumero(false);
       controller.excluir(idExcluir);
       break;
 

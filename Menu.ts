@@ -45,15 +45,15 @@ console.log(`${Colors.fg.cyan}Data atual: ${dataAtual}${Colors.reset}`);
 
 do {
   exibirMenu();
-  opcao = readlineSync.questionInt("Escolha uma opção para prosseguirmos: ");
+  opcao = readlineSync.questionInt("Escolha uma opcao para prosseguirmos: ");
 
   switch (opcao) {
     case 1:
       console.log("\n--- Cadastrar Plano Simples ---");
       const nomeSimples = readlineSync.question("Nome do plano: ");
-      const precoSimples = readlineSync.questionFloat("Preço: ");
+      const precoSimples = readlineSync.questionFloat("Preco: ");
       const frequenciaSimples = readlineSync.question(
-        "Frequência (semanal, mensal): "
+        "Frequencia (semanal, mensal): "
       );
       const planoSimples = new PlanoSimples(
         0,
@@ -67,9 +67,9 @@ do {
     case 2: {
       console.log("\n--- Cadastrar Plano Personalizado ---");
       const nomePersonalizado = readlineSync.question("Nome do plano: ");
-      const precoPersonalizado = readlineSync.questionFloat("Preço: ");
+      const precoPersonalizado = readlineSync.questionFloat("Preco: ");
       const frequenciaPersonalizada = readlineSync.question(
-        "Frequência (semanal, mensal): "
+        "Frequencia (semanal, mensal): "
       );
 
       const opcoesExtras = [
@@ -108,8 +108,8 @@ do {
       console.log("\n--- Atualizar Plano ---");
       const idAtualizar = readlineSync.questionInt("Digite o ID do plano: ");
       const novoNome = readlineSync.question("Novo nome: ");
-      const novoPreco = readlineSync.questionFloat("Novo preço: ");
-      const novaFrequencia = readlineSync.question("Nova frequência: ");
+      const novoPreco = readlineSync.questionFloat("Novo preco: ");
+      const novaFrequencia = readlineSync.question("Nova frequencia: ");
       const planoAtualizado = new PlanoSimples(
         idAtualizar,
         novoNome,

@@ -35,6 +35,17 @@ O sistema, em formato de console, representa essa filosofia ao possibilitar o ca
 
 ---
 
+## 🚀 Como usar
+
+1. Instale as dependências:
+   ```bash
+   npm install
+   ```
+2. Rode o projeto:
+   ```bash
+   npm run biobox
+   ```
+
 ## 🛠️ Tecnologias Utilizadas
 
 - [TypeScript](https://www.typescriptlang.org/)

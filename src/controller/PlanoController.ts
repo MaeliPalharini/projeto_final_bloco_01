@@ -17,7 +17,7 @@ export class PlanoController implements PlanoRepository {
   }
 
   public buscarPorId(id: number): Plano | null {
-    const plano = this.listaPlanos.find((p) => p.getId() === id);
+    const plano = this.listaPlanos.find((plano) => plano.getId() === id);
     if (plano) {
       plano.visualizar();
       return plano;
@@ -41,9 +41,9 @@ export class PlanoController implements PlanoRepository {
       Colors.reset
     );
   }
-
+  //Usei o findIndex pra econtrar a posição exata de um plano
   public atualizar(id: number, novoPlano: Plano): void {
-    const index = this.listaPlanos.findIndex((p) => p.getId() === id);
+    const index = this.listaPlanos.findIndex((plano) => plano.getId() === id);
 
     if (index !== -1) {
       novoPlano["id"] = id;
@@ -63,7 +63,7 @@ export class PlanoController implements PlanoRepository {
   }
 
   public excluir(id: number): void {
-    const index = this.listaPlanos.findIndex((p) => p.getId() === id);
+    const index = this.listaPlanos.findIndex((plano) => plano.getId() === id);
 
     if (index !== -1) {
       this.listaPlanos.splice(index, 1);

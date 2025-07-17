@@ -55,7 +55,8 @@ export abstract class Plano {
 
   public visualizar(): void {
     console.log("\n----------------------------------------------------");
-    console.log("\n----------- Resumo do seu contrato -----------------");
+    console.log("----------- Resumo do seu contrato -----------------");
+    console.log(`Id: ${this.id}`);
     console.log(`Plano: ${this.nome}`);
     console.log(`Frequência: ${this.frequencia}`);
     console.log(`Preço: R$ ${this.preco.toFixed(2)}`);

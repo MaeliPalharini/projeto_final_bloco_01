@@ -7,6 +7,5 @@ export class PlanoSimples extends Plano {
 
   public exibirTipoPlano(): void {
     console.log("Tipo: Plano Simples");
-    console.log("Itens inclusos: " + this.getItensFixos().join(", "));
   }
 }

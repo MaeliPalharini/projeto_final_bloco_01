@@ -54,14 +54,14 @@ export abstract class Plano {
   }
 
   public visualizar(): void {
-    console.log("\n----------------------------------------------------");
-    console.log("----------- Resumo do seu contrato -----------------");
+    console.log("\n┌──────────────────────────────────────────────────┐");
+    console.log(`└───────────── Resumo do seu contrato ─────────────┘`);
     console.log(`Id: ${this.id}`);
     console.log(`Plano: ${this.nome}`);
     console.log(`Frequência: ${this.frequencia}`);
     console.log(`Preço: R$ ${this.preco.toFixed(2)}`);
     console.log("Itens Fixos: " + this.itensFixos.join(", "));
-    this.exibirTipoPlano();
+    console.log("                 ──────//──────");
   }
 
   public abstract exibirTipoPlano(): void;
